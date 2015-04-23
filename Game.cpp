@@ -128,10 +128,15 @@ char buffer[250];
 }
 void Game::play()
 {
-	int letters = strlen(word);
+	int numbananas = strlen(word);
 	int cx = 0;
 	int cy = 0;
 	bool display[26];
+	char compare[255];
+	bool guess = false;
+	int bananaid = 0;
+	int x = 125;
+	int y = 65;
 	for(int i = 0; i < 26; i++)
 	{
 		display[i] = true;
@@ -153,7 +158,8 @@ void Game::play()
 					if(word[i] == 'a')
 					{
 						displayBMP("a.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'a';
+						guess = true;
 					}
 				}
 			}
@@ -170,7 +176,8 @@ void Game::play()
 					if(word[i] == 'b')
 					{
 						displayBMP("b.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'b';
+						guess = true;
 					}
 				}
 			}
@@ -186,7 +193,8 @@ void Game::play()
 					if(word[i] == 'c')
 					{
 						displayBMP("c.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'c';
+						guess = true;
 					}
 				}
 			}
@@ -202,7 +210,8 @@ void Game::play()
 					if(word[i] == 'd')
 					{
 						displayBMP("d.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'd';
+						guess = true;
 					}
 				}
 			}
@@ -218,7 +227,8 @@ void Game::play()
 					if(word[i] == 'e')
 					{
 						displayBMP("e.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'e';
+						guess = true;
 					}
 				}
 			}
@@ -234,7 +244,8 @@ void Game::play()
 					if(word[i] == 'f')
 					{
 						displayBMP("f.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'f';
+						guess = true;
 					}
 				}
 			}
@@ -250,7 +261,8 @@ void Game::play()
 					if(word[i] == 'g')
 					{
 						displayBMP("g.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'g';
+						guess = true;
 					}
 				}
 			}
@@ -266,7 +278,8 @@ void Game::play()
 					if(word[i] == 'h')
 					{
 						displayBMP("h.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'h';
+						guess = true;
 					}
 				}
 			}
@@ -282,7 +295,8 @@ void Game::play()
 					if(word[i] == 'i')
 					{
 						displayBMP("i.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'i';
+						guess = true;
 					}
 				}
 			}
@@ -298,7 +312,8 @@ void Game::play()
 					if(word[i] == 'j')
 					{
 						displayBMP("j.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'j';
+						guess = true;
 					}
 				}
 			}
@@ -314,7 +329,8 @@ void Game::play()
 					if(word[i] == 'k')
 					{
 						displayBMP("k.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'k';
+						guess = true;
 					}	
 				}
 			}
@@ -330,7 +346,8 @@ void Game::play()
 					if(word[i] == 'l')
 					{
 						displayBMP("l.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'l';
+						guess = true;
 					}
 				}
 			}
@@ -346,7 +363,8 @@ void Game::play()
 					if(word[i] == 'm')
 					{
 						displayBMP("m.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'm';
+						guess = true;
 					}
 				}
 			}
@@ -362,7 +380,8 @@ void Game::play()
 					if(word[i] == 'n')
 					{
 						displayBMP("n.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'n';
+						guess = true;
 					}
 				}
 			}
@@ -378,7 +397,8 @@ void Game::play()
 					if(word[i] == 'o')
 					{
 						displayBMP("o.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'o';
+						guess = true;
 					}
 				}
 			}
@@ -394,7 +414,8 @@ void Game::play()
 					if(word[i] == 'p')
 					{
 						displayBMP("p.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'p';
+						guess = true;
 					}
 				}
 			}
@@ -408,9 +429,11 @@ void Game::play()
 				for (int i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'q')
-				{
-					displayBMP("q.bmp", 100 +(i*30),250);
-					letters - 1;
+					{
+						displayBMP("q.bmp", 100 +(i*30),250);
+						compare[i] = 'q';
+						guess = true;
+					}
 				}
 			}
 		}
@@ -425,7 +448,8 @@ void Game::play()
 					if(word[i] == 'r')
 					{
 						displayBMP("r.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'r';
+						guess = true;
 					}
 				}
 			}
@@ -441,7 +465,8 @@ void Game::play()
 					if(word[i] == 's')
 					{
 						displayBMP("s.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 's';
+						guess = true;
 					}
 				}
 			}
@@ -457,7 +482,8 @@ void Game::play()
 					if(word[i] == 't')
 					{
 						displayBMP("t.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 't';
+						guess = true;
 					}
 				}
 			}
@@ -473,7 +499,8 @@ void Game::play()
 					if(word[i] == 'u')
 					{
 						displayBMP("u.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'u';
+						guess = true;
 					}
 				}
 			}
@@ -489,7 +516,8 @@ void Game::play()
 					if(word[i] == 'v')
 					{
 						displayBMP("v.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'v';
+						guess = true;
 					}
 				}
 			}
@@ -505,7 +533,8 @@ void Game::play()
 					if(word[i] == 'w')
 					{
 						displayBMP("w.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'w';
+						guess = true;
 					}
 				}
 			}
@@ -521,7 +550,8 @@ void Game::play()
 					if(word[i] == 'x')
 					{
 						displayBMP("x.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'x';
+						guess = true;
 					}
 				}
 			}
@@ -537,7 +567,8 @@ void Game::play()
 					if(word[i] == 'y')
 					{
 						displayBMP("y.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'y';
+						guess = true;
 					}
 				}
 			}
@@ -553,11 +584,42 @@ void Game::play()
 					if(word[i] == 'z')
 					{
 						displayBMP("z.bmp", 100 +(i*30),250);
-						letters - 1;
+						compare[i] = 'z';
+						guess = true;
 					}
 				}
 			}
 		}
+		if(guess != true)
+		 {
+			numbananas -= 1;
+			for (int i = 65; i < 190; i++)
+			{
+				   moveObject(bananas[bananaid], x, y += 1);
+			}
+
+			bananaid++;
+		}
+		 if(numbananas == 0)
+			{
+				clearGraphics();
+				//Tree
+ 				displayBMP("banana_tree.bmp",100,0);
+ 				//Line
+				int line = drawLine(0,190,680,190);
+				setColor(line,205,126,29);
+ 				//Statements
+ 				gout<<setPos(400,100)<<"Number of Bananas: 0"<<endg;
+ 				gout<<setPos(400,115)<<"Game Over"<<endg;
+ 				gout<<setPos(400,130)<<"Correct Word is: "<<word<<endg;
+				break;
+			}
+		 if(strcmp(word, compare) == 0)
+		 {
+			 clearGraphics();
+			 gout << setPos(400, 100) <<"You Win!!!"<<endg;
+			 break;
+		 }
 	}
+}while(numbananas < 0);
 }
-}while(letters < 0);
