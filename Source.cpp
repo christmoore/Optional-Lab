@@ -36,7 +36,7 @@ using namespace std;
     //Draw the scene
     game.draw();
 
-	game.play();
+    game.play();
 
 	  //Get the word
     char* temp = game.getWord();
