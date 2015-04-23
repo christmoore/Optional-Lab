@@ -49,7 +49,7 @@ void Game::setWord(int rand_no)
 		//test for eof
 
 		if(in_file.eof())
-		{
+		{ 
 			break;
 		}
 		//compare word_count to rand_no
