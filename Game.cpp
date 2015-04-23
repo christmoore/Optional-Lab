@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "graph1.h"
+#include <string>
 using namespace std;
 
 Game::Game(void)
@@ -97,14 +98,26 @@ void Game::draw()
 	 //White Boxes
     drawRect(x,y,40,32);
  
- x+=45;
+ x+=33;
  }
 
  //Tree
-	displayBMP("banana_tree.bmp",100,0);
+	 displayBMP("banana_tree.bmp",100,0);
+	 for (i=0; word[i] != NULL; i++)
+	 {
+		 if(i%2 == 0)
+		 {
+			bananas[i] = displayBMP("banana.bmp",125,65);	 
+		 }
+		 else
+		 {
+			bananas[i] = displayBMP("banana1.bmp",132,65);
+		 }
+	}
+
 	
 //Line
-	int line = drawLine(0,190,680,190);
+	int line = drawLine(0,190,680,190, 2);
 	setColor(line,205,126,29);
 
 //Text # of bananas
@@ -114,17 +127,20 @@ void Game::draw()
 char a = 'a';
 char buffer[250];
 
-	for(i=0; i<26; i++)
+	for(i=0; i<13; i++)
 	{
 		sprintf(buffer,"%c.bmp",a);
-		if(i<14)
 		displayBMP(buffer,100+(i*33),300);
-
-		if(i>13)
-		displayBMP(buffer,100+(i*33),333);
-		
 		a++;
 	}
+	for(i = 0; i < 13; i++)
+	{
+		sprintf(buffer,"%c.bmp",a);
+		displayBMP(buffer,100+(i*33),333);
+		a++;
+	}
+
+
 }
 void Game::play()
 {
@@ -132,11 +148,15 @@ void Game::play()
 	int cx = 0;
 	int cy = 0;
 	bool display[26];
-	char compare[255];
+	char* compare = new char[strlen(word) + 1];
 	bool guess = false;
 	int bananaid = 0;
 	int x = 125;
 	int y = 65;
+	int counter = 0;
+
+	
+
 	for(int i = 0; i < 26; i++)
 	{
 		display[i] = true;
@@ -144,22 +164,26 @@ void Game::play()
 
 	do
 	{
+
+	gout<<setPos(400,100)<<"Number of Bananas: "<< numbananas << endg;
+
 	if (leftMouse(cx,cy))
 	{
 		if(display[0] == true)
 		{
 			if (cx > 100 && cy > 300 && cx < 132 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(100, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
 				display[0] = false;
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'a')
 					{
-						displayBMP("a.bmp", 100 +(i*30),250);
-						compare[i] = 'a';
+						displayBMP("a.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[0] = false;
 					}
 				}
 			}
@@ -168,16 +192,17 @@ void Game::play()
 		{
 			if (cx > 133 && cy > 300 && cx < 165 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(133, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
 				display[1] = false;
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'b')
 					{
-						displayBMP("b.bmp", 100 +(i*30),250);
-						compare[i] = 'b';
+						displayBMP("b.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[1] = false;
 					}
 				}
 			}
@@ -186,15 +211,16 @@ void Game::play()
 		{
 			if (cx > 166 && cy > 300 && cx < 198 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(166, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'c')
 					{
-						displayBMP("c.bmp", 100 +(i*30),250);
-						compare[i] = 'c';
+						displayBMP("c.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[2] = false;
 					}
 				}
 			}
@@ -203,15 +229,16 @@ void Game::play()
 		{
 			if (cx > 199 && cy > 300 && cx < 231 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(199, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'd')
 					{
-						displayBMP("d.bmp", 100 +(i*30),250);
-						compare[i] = 'd';
+						displayBMP("d.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[3] = false;
 					}
 				}
 			}
@@ -220,15 +247,16 @@ void Game::play()
 		{
 			if (cx > 232 && cy > 300 && cx < 264 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(232, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'e')
 					{
-						displayBMP("e.bmp", 100 +(i*30),250);
-						compare[i] = 'e';
+						displayBMP("e.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[4] = false;
 					}
 				}
 			}
@@ -237,15 +265,16 @@ void Game::play()
 		{
 			if (cx > 265 && cy > 300 && cx < 297 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(265, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'f')
 					{
-						displayBMP("f.bmp", 100 +(i*30),250);
-						compare[i] = 'f';
+						displayBMP("f.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[5] = false;
 					}
 				}
 			}
@@ -254,15 +283,16 @@ void Game::play()
 		{
 			if (cx > 298 && cy > 300 && cx < 330 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(298, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'g')
 					{
-						displayBMP("g.bmp", 100 +(i*30),250);
-						compare[i] = 'g';
+						displayBMP("g.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[6] = false;
 					}
 				}
 			}
@@ -271,15 +301,16 @@ void Game::play()
 		{
 			if (cx > 331 && cy > 300 && cx < 363 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(331, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'h')
 					{
-						displayBMP("h.bmp", 100 +(i*30),250);
-						compare[i] = 'h';
+						displayBMP("h.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[7] = false;
 					}
 				}
 			}
@@ -288,15 +319,16 @@ void Game::play()
 		{
 			if (cx > 364 && cy > 300 && cx < 396 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(364, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'i')
 					{
-						displayBMP("i.bmp", 100 +(i*30),250);
-						compare[i] = 'i';
+						displayBMP("i.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[8] = false;
 					}
 				}
 			}
@@ -305,15 +337,16 @@ void Game::play()
 		{
 			if (cx > 397 && cy > 300 && cx < 429 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(397, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'j')
 					{
-						displayBMP("j.bmp", 100 +(i*30),250);
-						compare[i] = 'j';
+						displayBMP("j.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[9] = false;
 					}
 				}
 			}
@@ -322,15 +355,16 @@ void Game::play()
 		{
 			if (cx > 430 && cy > 300 && cx < 462 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(430, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'k')
 					{
-						displayBMP("k.bmp", 100 +(i*30),250);
-						compare[i] = 'k';
+						displayBMP("k.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[10] = false;
 					}	
 				}
 			}
@@ -339,15 +373,16 @@ void Game::play()
 		{
 			if (cx > 463 && cy > 300 && cx < 495 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(463, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'l')
 					{
-						displayBMP("l.bmp", 100 +(i*30),250);
-						compare[i] = 'l';
+						displayBMP("l.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[11] = false;
 					}
 				}
 			}
@@ -356,15 +391,16 @@ void Game::play()
 		{
 			if (cx > 496 && cy > 300 && cx < 528 && cy < 332)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(496, 300, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'm')
 					{
-						displayBMP("m.bmp", 100 +(i*30),250);
-						compare[i] = 'm';
+						displayBMP("m.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[12] = false;
 					}
 				}
 			}
@@ -373,15 +409,16 @@ void Game::play()
 		{
 			if (cx > 100 && cy > 333 && cx < 132 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(100, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'n')
 					{
-						displayBMP("n.bmp", 100 +(i*30),250);
-						compare[i] = 'n';
+						displayBMP("n.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[13] = false;
 					}
 				}
 			}
@@ -390,15 +427,16 @@ void Game::play()
 		{
 			if (cx > 133 && cy > 333 && cx < 165 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(133, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'o')
 					{
-						displayBMP("o.bmp", 100 +(i*30),250);
-						compare[i] = 'o';
+						displayBMP("o.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[14] = false;
 					}
 				}
 			}
@@ -407,15 +445,16 @@ void Game::play()
 		{
 			if (cx > 166 && cy > 333 && cx < 198 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(166, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'p')
 					{
-						displayBMP("p.bmp", 100 +(i*30),250);
-						compare[i] = 'p';
+						displayBMP("p.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[15] = false;
 					}
 				}
 			}
@@ -424,15 +463,16 @@ void Game::play()
 		{
 			if (cx > 199 && cy > 333 && cx < 231 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(199, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'q')
 					{
-						displayBMP("q.bmp", 100 +(i*30),250);
-						compare[i] = 'q';
+						displayBMP("q.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[16] = false;
 					}
 				}
 			}
@@ -441,15 +481,16 @@ void Game::play()
 		{
 			if (cx > 232 && cy > 333 && cx < 264 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(232, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'r')
 					{
-						displayBMP("r.bmp", 100 +(i*30),250);
-						compare[i] = 'r';
+						displayBMP("r.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[17] = false;
 					}
 				}
 			}
@@ -458,15 +499,16 @@ void Game::play()
 		{
 			if (cx > 265 && cy > 333 && cx < 297 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(265, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 's')
 					{
-						displayBMP("s.bmp", 100 +(i*30),250);
-						compare[i] = 's';
+						displayBMP("s.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[18] = false;
 					}
 				}
 			}
@@ -475,15 +517,16 @@ void Game::play()
 		{
 			if (cx > 298 && cy > 333 && cx < 330 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(298, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 't')
 					{
-						displayBMP("t.bmp", 100 +(i*30),250);
-						compare[i] = 't';
+						displayBMP("t.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[19] = false;
 					}
 				}
 			}
@@ -492,15 +535,16 @@ void Game::play()
 		{
 			if (cx > 331 && cy > 333 && cx < 363 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(331, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'u')
 					{
-						displayBMP("u.bmp", 100 +(i*30),250);
-						compare[i] = 'u';
+						displayBMP("u.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[20] = false;
 					}
 				}
 			}
@@ -509,15 +553,16 @@ void Game::play()
 		{
 			if (cx > 364 && cy > 333 && cx < 396 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(364, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'v')
 					{
-						displayBMP("v.bmp", 100 +(i*30),250);
-						compare[i] = 'v';
+						displayBMP("v.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[21] = false;
 					}
 				}
 			}
@@ -526,15 +571,16 @@ void Game::play()
 		{
 			if (cx > 397 && cy > 333 && cx < 429 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(397, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'w')
 					{
-						displayBMP("w.bmp", 100 +(i*30),250);
-						compare[i] = 'w';
+						displayBMP("w.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[22] = false;
 					}
 				}
 			}
@@ -543,15 +589,16 @@ void Game::play()
 		{
 			if (cx > 430 && cy > 333 && cx < 462 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(430, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'x')
 					{
-						displayBMP("x.bmp", 100 +(i*30),250);
-						compare[i] = 'x';
+						displayBMP("x.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[23] = false;
 					}
 				}
 			}
@@ -560,15 +607,16 @@ void Game::play()
 		{
 			if (cx > 463 && cy > 333 && cx < 495 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(463, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'y')
 					{
-						displayBMP("y.bmp", 100 +(i*30),250);
-						compare[i] = 'y';
+						displayBMP("y.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[24] = false;
 					}
 				}
 			}
@@ -577,49 +625,55 @@ void Game::play()
 		{
 			if(cx > 496 && cy > 333 && cx < 528 && cy < 365)
 			{
-				int obj = drawRect(letterx, lettery, 32, 32);
+				int obj = drawRect(496, 333, 32, 32);
 				setColor(obj, 50, 50, 50);
-				for (int i = 0; i < strlen(word) + 1; i++)
+				for (size_t i = 0; i < strlen(word) + 1; i++)
 				{
 					if(word[i] == 'z')
 					{
-						displayBMP("z.bmp", 100 +(i*30),250);
-						compare[i] = 'z';
+						displayBMP("z.bmp", 100 +(i*33),250);
+						counter++;
 						guess = true;
+						display[25] = false;
 					}
 				}
 			}
 		}
-		if(guess != true)
+		if(guess != true && cx > 100 && cx < 528 && cy > 300 && cy < 365)
 		 {
 			numbananas -= 1;
-			for (int i = 65; i < 190; i++)
+			for (int i = 65; i < 168; i++)
 			{
-				   moveObject(bananas[bananaid], x, y += 1);
+				Sleep(10);
+				moveObject(bananas[bananaid], x, y += 1);
 			}
+			removeObject(bananas[bananaid]);
+			y = 65;
 
 			bananaid++;
 		}
-		 if(numbananas == 0)
-			{
+		if(numbananas == 0)
+		{
 				clearGraphics();
 				//Tree
  				displayBMP("banana_tree.bmp",100,0);
  				//Line
-				int line = drawLine(0,190,680,190);
+				int line = drawLine(0,190,680,190 , 2);
 				setColor(line,205,126,29);
  				//Statements
  				gout<<setPos(400,100)<<"Number of Bananas: 0"<<endg;
  				gout<<setPos(400,115)<<"Game Over"<<endg;
  				gout<<setPos(400,130)<<"Correct Word is: "<<word<<endg;
 				break;
-			}
-		 if(strcmp(word, compare) == 0)
-		 {
+		}
+		if(strlen(word) == counter)
+		{
 			 clearGraphics();
 			 gout << setPos(400, 100) <<"You Win!!!"<<endg;
 			 break;
-		 }
+		}
+		guess = false;
+		
 	}
-}while(numbananas < 0);
+}while(numbananas > 0);
 }
