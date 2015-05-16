@@ -19,4 +19,4 @@ After every guess, a banana falls from a tree.
 
 If you run out of bananas, you lose the game.
 
-If you guess all the letteers correctly you win!
+If you guess all the letters correctly you win!
