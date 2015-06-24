@@ -2,12 +2,12 @@
 
 This was a collaborative lab done for CS II
 
-Primary Contributors:
-Christopher Moore
-Wei Ten Beh
-Adam Strack
-Antonije Lazic
-Kirby
+Primary Contributors:  
+Christopher Moore  
+Wei Ten Beh  
+Adam Strack  
+Antonije Lazic  
+Kirby  
 
 
 
